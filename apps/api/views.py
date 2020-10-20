@@ -3,13 +3,18 @@ from apps.api.paginations import CustomPagination
 from apps.api.generics import ListAPIView, CreateAPIView, RetrieveAPIView, \
     DestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
-from apps.api.models import Artist, Album, Song
+from apps.api.models import Artist, Album, Song, Country
 from apps.api.serializers import ArtistSerializer, AlbumSerializer, \
-    SongSerializer
-
+    SongSerializer, CountrySerializer
 
 
 # Create your views here.
+class ListCountryAPIView(ListAPIView):
+    model = Country
+    serializer_class = CountrySerializer
+    pagination_class = CustomPagination
+
+
 class ListArtistAPIView(ListAPIView, CreateAPIView):
     model = Artist
     serializer_class = ArtistSerializer

@@ -1,7 +1,13 @@
 from django.db.models import Sum
 from rest_framework import serializers
-from apps.api.models import Artist, Album, Song
+from apps.api.models import Artist, Album, Song, Country
 from apps.api.utils import format_mintute_seconds
+
+
+class CountrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = '__all__'
 
 
 class ArtistSerializer(serializers.ModelSerializer):
