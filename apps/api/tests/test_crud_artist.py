@@ -1,4 +1,5 @@
 from random import randint
+from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
@@ -25,6 +26,12 @@ class ArtistAPITestCase(APITestCase):
             'artists-detail',
             kwargs={'pk': self.artist_random.pk}
         )
+        user = User.objects.create_user(
+            username='test_user',
+            email='test@gmail.com',
+            password='pass1234',
+        )
+        self.client.force_authenticate(user=user)
         self.list_url = reverse('artists-list')
 
     def test_list(self):
