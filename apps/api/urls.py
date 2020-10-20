@@ -1,9 +1,13 @@
 from django.urls import path
 from apps.api.views import ListArtistAPIView, DetailArtistAPIView, \
-    ListAlbumAPIView, DetailAlbumAPIView, ListSongAPIView, DetailSongAPIView
+    ListAlbumAPIView, DetailAlbumAPIView, ListSongAPIView, DetailSongAPIView, \
+    ListCountryAPIView
 
 
 urlpatterns = [
+    path(
+        'countries/', ListCountryAPIView.as_view(), name='countries-list'
+    ),
     path(
         'artists/', ListArtistAPIView.as_view(), name='artists-list'
     ),
