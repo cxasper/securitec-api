@@ -41,6 +41,7 @@ DJANGO_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions'
 )
 
 THIRD_PARTY_APPS = (
@@ -100,6 +101,10 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT', 5432),
     }
 }
+
+
+# FIXTURE_DIRS
+FIXTURE_DIRS = ['apps/api/fixtures/']
 
 
 # Password validation
