@@ -3,8 +3,9 @@ from apps.api.paginations import CustomPagination
 from apps.api.generics import ListAPIView, CreateAPIView, RetrieveAPIView, \
     DestroyAPIView, UpdateAPIView
 from rest_framework.response import Response
-from apps.api.models import Artist, Album
-from apps.api.serializers import ArtistSerializer, AlbumSerializer
+from apps.api.models import Artist, Album, Song
+from apps.api.serializers import ArtistSerializer, AlbumSerializer, \
+    SongSerializer
 
 
 
@@ -33,3 +34,16 @@ class ListAlbumAPIView(ListAPIView, CreateAPIView):
 class DetailAlbumAPIView(RetrieveAPIView, DestroyAPIView, UpdateAPIView):
     model = Album
     serializer_class = AlbumSerializer
+
+
+class ListSongAPIView(ListAPIView, CreateAPIView):
+    model = Song
+    serializer_class = SongSerializer
+    pagination_class = CustomPagination
+    search_class = SearchFilter
+    search_fields = ['name']
+
+
+class DetailSongAPIView(RetrieveAPIView, DestroyAPIView, UpdateAPIView):
+    model = Song
+    serializer_class = SongSerializer
