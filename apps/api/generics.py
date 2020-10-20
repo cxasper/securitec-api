@@ -24,6 +24,7 @@ class CustomAPIView(APIView):
     # in this case 'client' is parent_field.
     parent_field = None
     parent = None
+    filter_parent = None
     # If you want to use object lookups other than pk, set 'lookup_field'.
     # For more complex lookup requirements override `get_object()`.
     lookup_field = 'pk'
@@ -51,8 +52,11 @@ class CustomAPIView(APIView):
 
         if self.parent_model:
             self.set_parent()
+            filter_args = {
+                self.filter_parent or self.parent_field: self.parent
+            }
             queryset = self.model.objects.filter(
-                **{self.parent_field: self.parent}
+                **filter_args
             )
         else:
             queryset = self.model.objects.all()
