@@ -1,6 +1,7 @@
 from django.db.models import Sum
 from rest_framework import serializers
-from apps.api.models import Artist, Album
+from apps.api.models import Artist, Album, Song
+from apps.api.utils import format_mintute_seconds
 
 
 class ArtistSerializer(serializers.ModelSerializer):
@@ -16,11 +17,22 @@ class AlbumSerializer(serializers.ModelSerializer):
     def get_duration(self, instance):
         all_songs = instance.songs.all()
         if all_songs:
-            split_timedelta = str(all_songs.aggregate(Sum('duration'))['duration__sum']).split(':')
-            total_minutes = int(split_timedelta[1]) + (int(split_timedelta[0])*60)
-            return '%s:%s' %(total_minutes, split_timedelta[2])
+            return format_mintute_seconds(all_songs.aggregate(Sum('duration'))['duration__sum'])
         return '00:00'
 
     class Meta:
         model = Album
         fields = '__all__'
+
+
+class SongSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Song
+        fields = '__all__'
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        duration = representation.pop('duration')
+        representation['duration'] = format_mintute_seconds(duration)
+        return representation
