@@ -1,12 +1,16 @@
 from django.urls import path
 from apps.api.views import ListArtistAPIView, DetailArtistAPIView, \
     ListAlbumAPIView, DetailAlbumAPIView, ListSongAPIView, DetailSongAPIView, \
-    ListCountryAPIView, SongsByAlbumAPIView, SongsByArtistAPIView
+    ListCountryAPIView, SongsByAlbumAPIView, SongsByArtistAPIView, \
+    AlbumsByArtistAPIView
 
 
 urlpatterns = [
     path(
         'countries/', ListCountryAPIView.as_view(), name='countries-list'
+    ),
+    path(
+        'artists/<str:artist>/albums/', AlbumsByArtistAPIView.as_view()
     ),
     path(
         'artists/<str:artist>/songs/', SongsByArtistAPIView.as_view()

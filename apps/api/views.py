@@ -66,3 +66,10 @@ class SongsByArtistAPIView(ListAPIView):
     model = Song
     serializer_class = SongSerializer
     pagination_class = CustomPagination
+
+
+class AlbumsByArtistAPIView(ListAPIView):
+    parent_model = Artist
+    model = Album
+    serializer_class = AlbumSerializer
+    pagination_class = CustomPagination
