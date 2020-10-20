@@ -29,7 +29,7 @@ Run project
 ```
 docker-compose up -d --build
 ```
-```
+
 Run migration
 ```
 docker-compose exec web python manage.py migrate
