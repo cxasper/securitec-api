@@ -52,3 +52,10 @@ class ListSongAPIView(ListAPIView, CreateAPIView):
 class DetailSongAPIView(RetrieveAPIView, DestroyAPIView, UpdateAPIView):
     model = Song
     serializer_class = SongSerializer
+
+
+class SongsByAlbumAPIView(ListAPIView):
+    parent_model = Album
+    model = Song
+    serializer_class = SongSerializer
+    pagination_class = CustomPagination
