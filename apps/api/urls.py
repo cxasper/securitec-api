@@ -1,5 +1,6 @@
 from django.urls import path
 from rest_framework.authtoken.views import obtain_auth_token
+from rest_auth.views import PasswordChangeView
 from apps.api.views import ListArtistAPIView, DetailArtistAPIView, \
     ListAlbumAPIView, DetailAlbumAPIView, ListSongAPIView, DetailSongAPIView, \
     ListCountryAPIView, SongsByAlbumAPIView, SongsByArtistAPIView, \
@@ -7,7 +8,9 @@ from apps.api.views import ListArtistAPIView, DetailArtistAPIView, \
 
 
 urlpatterns = [
-    path(r'login/', obtain_auth_token, name='login'),
+    path('login/', obtain_auth_token, name='login'),
+    path('password-change/', PasswordChangeView.as_view(),
+        name='rest_password_change'),
     path(
         'countries/', ListCountryAPIView.as_view(), name='countries-list'
     ),

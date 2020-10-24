@@ -48,6 +48,7 @@ THIRD_PARTY_APPS = (
     'rest_framework',
     'corsheaders',
     'rest_framework.authtoken',
+    'rest_auth',
 )
 
 LOCAL_APPS = (
@@ -117,7 +118,7 @@ DATABASES = {
 # FIXTURE_DIRS
 FIXTURE_DIRS = ['apps/api/fixtures/']
 
-
+OLD_PASSWORD_FIELD_ENABLED = True
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
